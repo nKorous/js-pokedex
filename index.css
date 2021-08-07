@@ -66,4 +66,6 @@
 
 .games {
     margin-left: 5px;
+    height: 400px;
+    overflow-y: scroll;
 }

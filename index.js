@@ -1,6 +1,7 @@
 const POKE_API = "https://pokeapi.co/api/v2/pokemon";
 let pokemonList;
 let selectedPokemon;
+let flavorText;
 
 function setPokemonPicture() {
     let img = document.getElementById('pokemonImg')
@@ -8,6 +9,26 @@ function setPokemonPicture() {
         ? selectedPokemon.sprites.other['official-artwork'].front_default
         : selectedPokemon.sprites.front_default
     img.setAttribute('src', imgSrc)
+}
+
+async function getFlavorText(url) {
+    await fetch(url)
+        .then(data => data.json())
+        .then(info => {
+           flavorText =  info.flavor_text_entries.filter(entry => entry.language.name === 'en')
+
+           let ul = document.getElementById('games')
+           ul.innerHTML = null
+
+           flavorText.forEach(ft => {
+               let li = document.createElement('li')
+               let text = ft.flavor_text.replace(/(\r\n|\n|\r)/gm , " ")
+
+               li.innerText = `${ft.version.name.toUpperCase()} - ${text}`
+
+               ul.appendChild(li)
+           })
+        })
 }
 
 function setPokemonInfo() {
@@ -38,16 +59,19 @@ function setPokemonInfo() {
     let weight = document.getElementById('pokemon-weight')
     weight.innerText = `Weight: ${selectedPokemon.weight}`
 
-    //Games
-    let games = document.getElementById('games')
-    games.innerHTML = null
+    // //Games
+    // let games = document.getElementById('games')
+    // games.innerHTML = null
 
-    selectedPokemon.game_indices.forEach(pokemon => {
-        let li = document.createElement('li')
-        li.innerText = pokemon.version.name
+    // selectedPokemon.game_indices.forEach(pokemon => {
+    //     let li = document.createElement('li')
+    //     li.innerText = pokemon.version.name
 
-        games.appendChild(li)
-    })
+    //     games.appendChild(li)
+    // })
+
+    //Flavor Text
+    getFlavorText(selectedPokemon.species.url)
 
 }
 
