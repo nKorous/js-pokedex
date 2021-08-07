@@ -23,10 +23,12 @@ function setPokemonInfo() {
 
     //Types
     let typeEL = document.getElementById('pokemon-type')
-    const typeOne = selectedPokemon.types[0].type.name
-    const typeTwo = selectedPokemon.types[1] ? ` / ${selectedPokemon.types[1].type.name}` : ""
+    const typeOne = `<button style="background-color: var(--${selectedPokemon.types[0].type.name}-color); color: white"> ${selectedPokemon.types[0].type.name} </button>`
+    const typeTwo = selectedPokemon.types[1] 
+        ? ` / <button style="background-color: var(--${selectedPokemon.types[1].type.name}-color); color: white"> ${selectedPokemon.types[1].type.name} </button>` 
+        : ""
 
-    typeEL.innerText = `Type: ${typeOne}${typeTwo}`
+    typeEL.innerHTML = `Type: ${typeOne}${typeTwo}`
 
     //Height
     let height = document.getElementById('pokemon-height')
