@@ -39,6 +39,11 @@
     width: 150px;
 }
 
+.pokemon-list-item:hover {
+    color: var(--poke-blue);
+    text-decoration: underline;
+}
+
 
 .pokemon-container {
     position: absolute;
