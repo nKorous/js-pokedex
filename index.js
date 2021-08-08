@@ -59,17 +59,6 @@ function setPokemonInfo() {
     let weight = document.getElementById('pokemon-weight')
     weight.innerText = `Weight: ${selectedPokemon.weight}`
 
-    // //Games
-    // let games = document.getElementById('games')
-    // games.innerHTML = null
-
-    // selectedPokemon.game_indices.forEach(pokemon => {
-    //     let li = document.createElement('li')
-    //     li.innerText = pokemon.version.name
-
-    //     games.appendChild(li)
-    // })
-
     //Flavor Text
     getFlavorText(selectedPokemon.species.url)
 
@@ -82,7 +71,6 @@ async function getPokemon(url) {
             selectedPokemon = pokemon
             setPokemonPicture()
             setPokemonInfo()
-            console.log(selectedPokemon)
         })
 }
 
@@ -107,9 +95,6 @@ async function getPokemonList() {
       makePokemonDisplay()
     });
 }
-
-
-
 
 //init
 getPokemonList();
